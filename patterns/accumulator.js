@@ -7,9 +7,9 @@
 export function sumToN(n) {
   if (typeof n !== "number") return NaN;
 
-  let sum = 0;
+  let sum = 0; // accumulator
   for (let i = 1; i <= n; i++) {
-    sum += i;
+    sum += i; // update accumulator
   }
   return sum;
 }
@@ -22,7 +22,15 @@ export function sumToN(n) {
  * @returns `1` if n is 0
  */
 export function factorial(n) {
-  // TODO
+  if (typeof n !== "number") return NaN; // guard
+  if (n < 0) return undefined; // guard
+  if (n === 0) return 1; // special case
+
+  let product = 1; // accumulator
+  for (let i = 1; i <= n; i++) {
+    product *= i;
+  }
+  return product;
 }
 
 /**
@@ -32,7 +40,14 @@ export function factorial(n) {
  * @returns `[]` if n is 0 or negative
  */
 export function buildNArray(n) {
-  // TODO
+  if (typeof n !== "number") return null; // guard
+  if (n <= 0) return []; // guard
+
+  const out = []; // accumulator (array)
+  for (let i = 1; i <= n; i++) {
+    out.push(i);
+  }
+  return out;
 }
 
 /**
@@ -40,7 +55,15 @@ export function buildNArray(n) {
  * @returns {string} the longest string in `strings`
  */
 export function getLongestString(strings) {
-  // TODO
+  // Assume tests give a non-empty array. If empty, this returns "".
+  let longest = strings[0] ?? "";
+
+  for (const s of strings) {
+    if (s.length > longest.length) {
+      longest = s;
+    }
+  }
+  return longest;
 }
 
 /**
@@ -48,7 +71,11 @@ export function getLongestString(strings) {
  * @returns {number} the number of students present
  */
 export function countPresent(attendance) {
-  // TODO
+  let count = 0; // accumulator
+  for (const isHere of attendance) {
+    if (isHere === true) count += 1;
+  }
+  return count;
 }
 
 /**
@@ -62,5 +89,19 @@ export function countPresent(attendance) {
  * @returns `null` if `dna` is not a string
  */
 export function complementDNA(dna) {
-  // TODO
+  if (typeof dna !== "string") return null; // guard
+
+  const map = {
+    A: "T",
+    T: "A",
+    C: "G",
+    G: "C",
+  };
+
+  let out = "";
+  for (const ch of dna) {
+    if (!(ch in map)) return null; // safety guard if unexpected character
+    out += map[ch];
+  }
+  return out;
 }

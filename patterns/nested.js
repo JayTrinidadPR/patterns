@@ -24,27 +24,40 @@ export function makeBoard(rows, cols) {
 /**
  * A 'triangle' is 2D array where each inner array has one more element than the previous.
  *
- * For example, this is a 2x2 triangle:
- * [
- *   ["-"],
- *   ["-", "-"]
- * ]
- *
  * @param {*} size - the number of rows in the triangle
  * @returns {string[][]} a triangle with `side` rows
  * @returns `null` if `size` is not a number
  * @returns `[]` if `size` is 0 or negative
  */
 export function makeTriangle(size) {
-  // TODO
+  if (typeof size !== "number") return null; // guard
+  if (size <= 0) return []; // guard
+
+  const triangle = [];
+  for (let rowSize = 1; rowSize <= size; rowSize++) {
+    const row = [];
+    for (let i = 0; i < rowSize; i++) {
+      row.push("-");
+    }
+    triangle.push(row);
+  }
+  return triangle;
 }
 
 /**
  * @param {string[]} words
  * @param {string} letter - a single character
- * @returns {number}  the number of times `letter` appears in all the words
- * @returns `0` if `letter is not a string
+ * @returns {number} the number of times `letter` appears in all the words
+ * @returns `0` if `letter` is not a string
  */
 export function countLetter(words, letter) {
-  // TODO
+  if (typeof letter !== "string") return 0; // guard
+
+  let count = 0;
+  for (const word of words) {
+    for (const ch of word) {
+      if (ch === letter) count += 1;
+    }
+  }
+  return count;
 }

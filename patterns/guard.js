@@ -5,6 +5,7 @@
  * @returns `NaN` if either argument is not a number
  */
 export function multiply(num1, num2) {
+  // GUARD: stop early if inputs aren't numbers
   if (typeof num1 !== "number" || typeof num2 !== "number") {
     return NaN;
   }
@@ -18,7 +19,17 @@ export function multiply(num1, num2) {
  * @returns {string} "Who would you like to vote for?" if `age` is 18 or older
  */
 export function vote(age) {
-  // TODO
+  // GUARD 1: must be a number (and not NaN)
+  if (typeof age !== "number" || Number.isNaN(age)) {
+    return "Age not valid.";
+  }
+
+  // GUARD 2: must be 18+
+  if (age < 18) {
+    return "You must be 18 or older to vote.";
+  }
+
+  return "Who would you like to vote for?";
 }
 
 /**
@@ -28,5 +39,10 @@ export function vote(age) {
  * @returns `undefined` if either argument is not a string
  */
 export function concatenateStrings(str1, str2) {
-  // TODO
+  // GUARD: both must be strings
+  if (typeof str1 !== "string" || typeof str2 !== "string") {
+    return undefined;
+  }
+
+  return str1 + str2;
 }
